@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html ng-app="Calculator">
+<head>
+	<meta charset="utf-8">
+	<title>FreeCampCalculator</title>
+	<link href='https://fonts.googleapis.com/css?family=Pacifico' rel='stylesheet' type='text/css'>
+	<link rel="stylesheet" type="text/css" href="style.css">
+</head>
+<body  ng-controller="MainController">
+	<div class="calculator">
+		<input class="screen" type="text" ng-model="calculator.calScreen"/>
+			<div class="numbers">
+				<div class="container" ng-controller="BtnController">
+					<span class="btn" ng-click="insert($event)" ng-repeat="number in numbers" >
+						{{number.value}}
+					</span>
+					<a href="http://freecodecamp.com" target="_blank">FreeCodeCamp</a>
+				</div>
+			</div>
+			<div class="operations" ng-controller="BtnController">
+				<span class="btn" ng-click="insert($event)" ng-repeat="operation in operations" >
+					{{operation.value}}
+				</span>
+			</div>
+	</div>
+<script type="text/javascript" src="../Angularjs.1.4.4.min.js"></script>
+<script type="text/javascript" src="../jquery.1.11.3.js"></script>
+<script type="text/javascript" src="js/app.js"></script>
+</body>
+</html>
