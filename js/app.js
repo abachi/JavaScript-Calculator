@@ -7,14 +7,6 @@
 hit the clear button, and the calculator will tell me the correct output.
 */
 
-/*
-
-		
-
-
-
-*/
-
 var app = angular.module('Calculator', []);
 
 app.service('calculations', function(){
@@ -43,62 +35,49 @@ app.service('calculations', function(){
 			},
 			hasOperation: function(str){
 				// 0  because of the negatives numbers
-				return (
-						str.indexOf('+') > -1 ||
-						str.indexOf('-') > -1 ||
-						str.indexOf('×') > -1 ||
-						str.indexOf('÷') > -1 
-					);
+				for(var i=str.length; i>0; i--){
+					if(this.isOperator(str.charAt(i)))
+						return true;
+				}
+				return false;
 			},
 			operationsSort: function(str){
-					
-					// make sure this str is a chain of operations
-					var pattren = new RegExp(/(^([^×÷]?\d*(\+|\-|\×|\÷){1}\d+)+)$/g);
+					// make sure this str is a chain of mathematical operations
+					var pattren = new RegExp(/(^((\+|\-)?\d*(\+|\-|\×|\÷){1}\d+)+)$/g);
+					if(!pattren.test(str)){  
+						return null;
+					}
 
-					// 
-					if(!pattren.test(str)){  console.log('null'); return null;}
-					console.log('rani fet')
 					var operation = {
 							a:'',
 							op:'',
 							b:''
 						},
-						i;
-					while(this.hasOperation(str)){
-						console.log('hello')
-						
+						i=0;
+					while(this.hasOperation(str)){						
 						for( i=0; i<str.length; i++){
 							if(this.isOperator(str[i]) && i>0){
 								operation.op = this.isOperator(str[i]);
-								console.log('break', 'the operation.op : ', operation.op);
 								break;
 							}else{
 								operation.a+=str[i];
-								console.log('the operation.a : ', operation.a);
 							}
-						}
-						for(i=str.indexOf(operation.op)+1; i<str.length; i++){
+						}				
+						for(i=i+1; i<str.length; i++){
 							if(this.isOperator(str[i])){
-								console.log('break')
 								break;
 							}else{
 								operation.b+=str[i];
 							}
 						}
-						operation.a = parseInt(operation.a);
-						operation.b = parseInt(operation.b);
-						console.log(operation.a,operation.b)
-
+						operation.a = parseFloat(operation.a);
+						operation.b = parseFloat(operation.b);
 						str = this.calc(operation.a, operation.op, operation.b) + str.slice(i, str.length);
-						console.log(str)
-						// console.log('i: '+i,str.slice(i, str.length), 'hada result '+str)
-						i=0;
 						operation.op='';
 						operation.a='';
 						operation.b='';							
 					}
 					return str;
-
 			}	
 	}
 });
@@ -134,18 +113,17 @@ app.controller('BtnController', ['$scope', 'calculations', function($scope, calc
 			var input = e.target.childNodes[0].textContent.trim();
 			if(input == 'DEL'){
 				$scope.calculator.calScreen = '';
-				// clean the local vars
 				return; 
 			}
 			if(input == '='){
-				$scope.calculator.calScreen = calculations.operationsSort($scope.calculator.calScreen);
+				var result = calculations.operationsSort($scope.calculator.calScreen);
+				if(result)
+					$scope.calculator.calScreen = result; 
+				return;
 			}
 			if(input !== 'DEL' && input !== '='){
 				$scope.calculator.calScreen +=input;
-
-				// return;
+				return;
 			}	
-
-			//console.log($scope.calculator.calScreen)
 		};
 }]);
