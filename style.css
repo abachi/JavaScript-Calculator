@@ -1,5 +1,4 @@
 *{ padding: 0; margin: 0; font-family: "Exo 2"}
-
 body{ background-color: #03A9F4; }
 a{ 
     width: 100%;
@@ -11,7 +10,11 @@ a{
     display: block;
     text-decoration: none;
 }
-.calculator{ width: 300px;margin: 10% auto 0; box-shadow: 6px 8px 15px rgba(136,136,136,0.6)}
+
+.calculator{ 
+	width: 300px;margin: 10% auto 0; 
+	box-shadow: 6px 8px 15px rgba(136,136,136,0.6)
+}
 .screen{ 
 	width: 100%;
 	height: 60px;
@@ -26,7 +29,11 @@ a{
 	letter-spacing: 1px;
 	word-wrap: break-word;
 }
-.container{ width: 80%; height: 100%; margin: 0 auto; overflow: hidden;}
+.container{ width: 80%;
+	height: 100%;
+	margin: 0 auto;
+	overflow: hidden;
+}
 .numbers{
 	width: 80%;
 	height: 300px;

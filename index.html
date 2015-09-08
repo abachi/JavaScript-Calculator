@@ -9,18 +9,18 @@
 </head>
 <body  ng-controller="MainController">
 	<div class="calculator">
-		<input class="screen" type="text" ng-model="calculator.calScreen"/>
+		<input class="screen" type="text" ng-model="calculator.screen"/>
 			<div class="numbers">
 				<div class="container" ng-controller="BtnController">
-					<span class="btn" ng-click="insert($event)" ng-repeat="number in numbers" >
-						{{number.value}}
+					<span class="btn" ng-click="insert($event)" ng-repeat="btn in btns" >
+						{{btn}}
 					</span>
 					<a href="http://freecodecamp.com" target="_blank">FreeCodeCamp</a>
 				</div>
 			</div>
 			<div class="operations" ng-controller="BtnController">
-				<span class="btn" ng-click="insert($event)" ng-repeat="operation in operations" >
-					{{operation.value}}
+				<span class="btn" ng-click="insert($event)" ng-repeat="operator in operators" >
+					{{operator}}
 				</span>
 			</div>
 	</div>
